@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detector de CO2 y Ventilación Automática</title>
+    <link rel="icon" href="icono.jpg" type="image/jpg">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #27ae60;
+            --warning-color: #f39c12;
+            --danger-color: #c0392b;
+            --bg-light: #ecf0f1;
+            --text-color: #333;
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--text-color);
+            line-height: 1.6;
+            background-color: var(--bg-light);
+        }
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+        }
+        header h1 { margin: 0; font-size: 2.5rem; }
+        header .subtitle { font-size: 1.2rem; opacity: 0.9; margin-top: 10px; }
+        header .integrantes { margin-top: 20px; font-size: 0.9rem; font-style: italic; }
+        main {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        section {
+            background: white;
+            margin-bottom: 2rem;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        h2 {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        .demo-visual {
+            width: 100%;
+            background-color: #333;
+            color: white;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: center;
+            overflow: hidden;
+        }
+        .demo-visual img, .demo-visual video {
+            width: 100%; height: 100%; object-fit: cover;
+        }
+        .bom-list {
+            list-style: none; padding: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        .bom-list li {
+            background: #f9f9f9;
+            padding: 15px;
+            border-left: 4px solid var(--accent-color);
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+        }
+        .bom-list i { margin-right: 10px; color: var(--primary-color); }
+        pre {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: 'Consolas', monospace;
+            border: 1px solid #444;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: var(--primary-color);
+            color: white;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Sistema de Ventilación Automatizado</h1>
+        <div class="subtitle">Detector de CO2 y control inteligente de ventanas</div>
+        <div class="integrantes">
+            <p>Materia: Laboratorio de Hardware | Curso: 5°C | Escuela: Instituto Privado El Obraje | Año: 2024</p>
+            <p>Integrantes: Romina Vazquez, Lautaro Ramirez, Joaquin Decara, Juan Bel</p>
+        </div>
+    </header>
+
+    <main>
+        <section id="intro">
+            <h2>Introducción</h2>
+            <p>
+                La acumulación de gases nocivos como el dióxido de carbono (CO2) en espacios cerrados puede ser perjudicial para la salud.
+                Este proyecto propone una solución automatizada: un sistema que monitorea constantemente la calidad del aire y acciona un
+                mecanismo que simula la apertura de una ventana para ventilar el ambiente cuando los niveles son peligrosos.
+            </p>
+            <div class="demo-visual" style="height: 400px;">
+                <img src="proyecto.jpg" alt="Proyecto funcionando"
+                 style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+
+
+            <h3>¿Qué problema resuelve?</h3>
+            <p>Evita la intoxicación por gases y mantiene el aire fresco automáticamente, emitiendo alertas visuales y sonoras.</p>
+        </section>
+
+        <section id="materiales">
+            <h2>Lista de Materiales</h2>
+            <ul class="bom-list">
+                <li><i class="fas fa-microchip"></i> Arduino Uno R3</li>
+                <li><i class="fas fa-wind"></i> Sensor de Gas MQ-135</li>
+                <li><i class="fas fa-robot"></i> Servomotor SG90</li>
+                <li><i class="fas fa-volume-up"></i> Piezo Buzzer</li>
+                <li><i class="fas fa-lightbulb" style="color:red;"></i> LED Rojo</li>
+                <li><i class="fas fa-lightbulb" style="color:orange;"></i> LED Amarillo</li>
+                <li><i class="fas fa-grip-lines"></i> Resistencias y Cables</li>
+            </ul>
+        </section>
+
+        <section id="esquema">
+            <h2>Esquema de Conexiones</h2>
+            <p>Conexión de pines:</p>
+            <ul>
+                <li>Sensor MQ-135 → A0</li>
+                <li>Servomotor → D2</li>
+                <li>Zumbador → D7</li>
+                <li>LED Amarillo → D12</li>
+                <li>LED Rojo → D13</li>
+            </ul>
+           <div class="demo-visual" style="height: 500px; background:white; border:2px dashed #ccc; color:#666;">
+                <img src="esquema.jpg" alt="Esquema de conexiones"
+                 style="width:100%; height:100%; object-fit:contain;">
+            </div>
+
+
+        </section>
+
+        <section id="codigo">
+            <h2>Código Fuente</h2>
+            <pre><code>#include <Servo.h>
+Servo Servo1;
+int gas;
+int piezo = 7;
+int ledr = 13;
+int leda = 12;
+void setup(){
+  Serial.begin(9600);
+  Servo1.attach(2);
+  pinMode(leda, OUTPUT);
+  pinMode(ledr, OUTPUT);
+  pinMode(piezo, OUTPUT);
+}
+void loop(){
+  gas = analogRead(A0);
+  if(gas >= 550){ digitalWrite(leda,LOW);
+    digitalWrite(ledr,HIGH); delay(100);
+    digitalWrite(ledr,LOW); delay(100);
+    Servo1.write(110);
+    tone(piezo,525); delay(150); noTone(piezo);
+    delay(500);
+  }
+  else if(gas >= 400){ digitalWrite(leda,HIGH);
+    digitalWrite(ledr,LOW);
+    Servo1.write(55); delay(500);
+  }
+  else if(gas > 300){ digitalWrite(leda,LOW);
+    digitalWrite(ledr,LOW);
+    Servo1.write(25); delay(500);
+  }
+  else{ digitalWrite(leda,LOW);
+    digitalWrite(ledr,LOW);
+    Servo1.write(0);
+  }
+  Serial.println(gas);
+  delay(200);
+}</code></pre>
+        </section>
+
+        <section id="manual">
+            <h2>Manual de Usuario</h2>
+            <ol>
+                <li>Estado Normal: ventana cerrada, sin luces.</li>
+                <li>Baja concentración: ventana abre 25°.</li>
+                <li>Media: LED amarillo y apertura a 55°.</li>
+                <li>Emergencia: LED rojo parpadea, alarma y apertura total.</li>
+            </ol>
+        </section>
+    </main>
+
+    <footer>
+        <p>Proyecto Final - Laboratorio de Hardware 2024 - Instituto Privado El Obraje</p>
+    </footer>
+</body>
+</html>
